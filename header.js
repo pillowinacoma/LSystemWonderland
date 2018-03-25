@@ -158,6 +158,6 @@ class Grammar{
 		this._rules = rules;
 	}
 }
-function openingAnimation(){
-	
+function windowResized() {
+  resizeCanvas(2*windowWidth/3,windowHeight);
 }

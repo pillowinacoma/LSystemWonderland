@@ -16,7 +16,18 @@
     </style>
 </head>
 <body>
-	<table>
+			<script>
+				function launch(){
+					document.getElementById('welcome').style.display = "none";
+					document.getElementById('studio').style.display = "block";
+				}
+			</script>
+	<table border="1" id="welcome" style="width: 50%;margin: auto;">
+			<tr><td colspan="2" style="text-align: center;"><h1>Welcome</h1></td></tr>	
+			<tr><td width="50%" style="text-align: center;">You're new to L-systems <br><a href="tutorial/index.html"><button>tutorial</button></a></td>
+				<td width="50%" style="text-align: center;">You're familiar with L-systems<br><button id="launch" onclick="launch()">Launch</button></td>
+			</tr></table>
+	<table id="studio" style="display: none;" >
 		<tr>
 			<td>
 				<form>
