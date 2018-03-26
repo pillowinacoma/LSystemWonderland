@@ -60,14 +60,14 @@ function shapeMesure(word,initAngle){
 	for (var i = 0; i < word.length; i++) {
 		var c = word.charAt(i);
 		if(c == 'f' || c == 'F'){
-			if (_Xmin > cos(initAngle)/len)
-				_Xmin = cos(initAngle)/len;
-			else if(_Xmax < cos(initAngle)/len)
-				_Xmax = cos(initAngle)/len;
-			if (_Ymin > sin(initAngle)/len)
-				_Ymin = sin(initAngle)/len;
-			else if(_Ymax < sin(initAngle)/len)
-				_Ymax = sin(initAngle)/len;
+			if (_Xmin > cos(angle)/len)
+				_Xmin = cos(angle)/len;
+			else if(_Xmax < cos(angle)/len)
+				_Xmax = cos(angle)/len;
+			if (_Ymin > sin(angle)/len)
+				_Ymin = sin(angle)/len;
+			else if(_Ymax < sin(angle)/len)
+				_Ymax = sin(angle)/len;
 		}
 		else if(c == '+'){
 			angle += rotationAngle;
