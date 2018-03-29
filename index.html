@@ -1,63 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>L-System Wonderland</title>
-	<meta charset="utf-8">
-    <!--P5*JS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
-    <!--STYLE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-    <style type="text/css">
-    	canvas[id='defaultCanvas0']{
-    		position: fixed;
-    		top: 0px;
-    	}
-    </style>
+	<title>Welcome</title>
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css">
 </head>
 <body>
-			<script>
-				function launch(){
-					document.getElementById('welcome').style.display = "none";
-					document.getElementById('studio').style.display = "block";
-				}
-			</script>
-	<table border="1" id="welcome" style="width: 50%;margin: auto;">
-			<tr><td colspan="2" style="text-align: center;"><h1>Welcome</h1></td></tr>	
-			<tr><td width="50%" style="text-align: center;">You're new to L-systems <br><a href="tutorial/index.html"><button>tutorial</button></a></td>
-				<td width="50%" style="text-align: center;">You're familiar with L-systems<br><button id="launch" onclick="launch()">Launch</button></td>
-			</tr></table>
-	<table id="studio" style="display: none;" >
+	<div class="welcome">
+		<p style="font-family: Lobster">welcome</p>
+	</div>
+	<table class="redirect">
 		<tr>
-			<td>
-				<form>
-					<fieldset>
-						<table>
-							<tr><th colspan="2" style="text-align: center;">Make Your own L-System</th></tr>
-							<tr><td>Axiom</td><td><input type="text" name="axiom" placeholder="default value : f"></td></tr>
-							<tr><td>Rotation angle</td><td><input type="text" name="angle" placeholder="default value : 60°"></td></tr>
-							<tr><td>Rules</td><td><textarea rows="4" cols="33" name="rules" placeholder="Alphabet->RULE"></textarea></td></tr>
-							<tr><td><input type="Button" id="submit" value="Create now!"> <input type="reset" name="reset" value="Reset"></td>
-								<td><input type="Button" name="Boom" value="Boom"></td></tr>
-						</table>
-					</fieldset>
-					<fieldset>
-						<table>
-							<tr><th colspan="2" style="text-align: center;">Samples</th></tr>
-							<tr><td><input type="button" name="dragonCurve" value="Dragon curve"></td><td><img src="images/dragonCurve.jpeg"></td></tr>
-							<tr><td><input type="button" name="rings" value="Koch curve"></td><td><img src="images/rings.png" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="hilbertCurve" value="Hilbert curve"></td><td><img src="images/hilbertcurve.png" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="kochSnowflake" value="Koch snowflake"></td><td><img src="images/koch_snowflake.gif" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="sierpinskicarpet" value="Sierpinski's carpet"></td><td><img src="images/sierpinskicarpet.gif" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="sierpinskitriangle" value="Sierpinski's triangle"></td><td><img src="images/SierpinskiTriangle.svg.png" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="spacefillingtree" value="Space-filling tree"></td><td><img src="images/Space_Filling_Tree_Square6.png" style="width: 140px;"></td></tr>
-						</table>
-					</fieldset>
-				</form>
-			</td>
-			<td>
-				<div id="header"> <script src="js/screenScript.js"></script></div>
-			</td>
+			<td><div>
+				<a class="goto" href="/tutorial/index.html">You're new to L-systems</a>
+			</div></td>
+			<td><div>
+				<a class="goto" href="studio/index.html">you're familiar with L-systems</a>
+			</div></td>
 		</tr>
 	</table>
 </body>

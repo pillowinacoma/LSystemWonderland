@@ -6,14 +6,14 @@ var rotationAngle = 60;
 var Xmax = 0,Xmin = 0,Ymax = 0,Ymin = 0;
 var BG_COLOR = 51;
 var TITLE1_TRANSPARENCY = 0;
+var axiom = "f",word,nbRep = 0;
+//var centeringX = width/16;
+//var centeringY = height/16;
 
 function preload(){
 	
 }
 function setup(){
-	var centeringX = width/16;
-	var centeringY = height/16;
-	var axiom = "f",word,nbRep = 0, angle = 60, length;
 	var screen = createCanvas(2*windowWidth/3,windowHeight);
 	screen.parent("header");
 	background(BG_COLOR);
@@ -28,13 +28,15 @@ function draw(){
 	else {
 		background(BG_COLOR);
 		noLoop();
+		var grammar = new Grammar(axiom);
 		document.getElementById('submit').onclick = function(){
+
 			if (document.getElementsByName('axiom').value != null) {
 				axiom = document.getElementByName('axiom').value;
 			}
 				var grammar = new Grammar('axiom');
 			if (document.getElementsByName('angle').value != null) {
-				angle = parseFloat(document.getElementByName('angle').value);
+				rotationAngle = parseFloat(document.getElementByName('angle').value);
 			}
 			if (document.getElementsByName('rules').value != null) {
 				var ruleTable = document.getElementByName('rules').value.split("\n");
@@ -43,7 +45,12 @@ function draw(){
 				}
 			}
 		}
-
+			var turtle = new Turtle(length,radians(rotationAngle));
+			print(turtle);
+			print(grammar);
+//TODO ---> translate and rotate to place the shape in the best place 
+			translate(width/2,height);
+			turtle.drawSys(grammar.word);
 	}
 }
 function sysGen(){
@@ -83,23 +90,35 @@ function shapeMesure(word,initAngle){
 }
 class Turtle{
 	constructor(stepLength,rotationAngle){
-		this.stepLength = stepLength;
-		this.rotationAngle = rotationAngle;
+		this._stepLength = stepLength;
+		this._rotationAngle = rotationAngle;
+	}
+	get stepLength(){
+		return _stepLength;
+	}
+	get rotationAngle(){
+		return _rotationAngle;
+	}
+	set stepLength(stepLength){
+		this._stepLength = stepLength;
+	}
+	set rotationAngle(rotationAngle){
+		this._rotationAngle = rotationAngle;
 	}
 	drawSys(word){
 		var colors = Array(color(255,255,255),color(255,0,0),color(255,127,0),color(255,255,0),color(0,255,0),color(0,0,255),color(75,0,130),color(143,0,255));
-		stepColor = 0;
+		var stepColor = 0;
 		background(BG_COLOR);
 		stroke(colors[stepColor]);			//this way we can draw lines in a variation of colors
-		var len = stepLength;
+		var len = this._stepLength;
 
 		for(var i = 0 ; i < word.length ; i++){
 			 var c = word.charAt(i);
 				if (c == 'f') {				//move one step and draw a line
-			      line(0, 0, 0, -l);
-			      translate(0, -l);
+			      line(0, 0, 0, -len);
+			      translate(0, -len);
 			    } else if (c == 'F') {		//invisible step
-			      translate(0, -l);
+			      translate(0, -len);
 			    } else if (c == '+') {		//turn "right" by rotationAngle
 			      rotate(rotationAngle);			
 			    } else if (c == '-') {		//turn "left" by rotationAngle

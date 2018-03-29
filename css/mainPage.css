@@ -1,0 +1,33 @@
+@font-face{
+      font-family: Lonbster;
+        src: "fonts/Lobster/Lobster-Regular.ttf";
+    }
+    .welcome{
+      width: 50%;
+      margin: auto;
+      text-align: center;
+    }
+    .welcome p{
+      font-size: 72px;
+    }
+    .redirect{
+      width: 50%;
+      margin: auto;
+      text-align: center;
+      font-family: Lobster;
+      font-size: 20px;
+    }
+    .goto{
+      text-decoration:none;
+    }
+    .goto:link, .goto:visited{
+      color: black;
+      padding: 14px 25px;
+      border: 2px solid black;
+
+    }
+    .goto:hover, .goto:active{
+      color: white;
+      padding: 14px 25px;
+      background-color: black;
+    }

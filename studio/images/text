@@ -1,0 +1,74 @@
+var w_head,h_head,w_screen,h_screen;
+	w_head = 750;
+	h_head = 200;
+	w_screen = 750;
+	h_screen = 600;
+var BG_COLOR = 51;
+		var regles = [];
+		regles[0] = {
+			in : "f",
+			out: "ff+f+f+f+f+f-f"
+		};
+		var axiom = "f+f+f+f";
+		var mot = axiom ; 
+		var longueur = 2;
+		var nbItter = 1;
+		var angle;
+
+
+		function setup(){
+			angle = PI/2;
+			var screen = createCanvas(w_screen,h_screen);
+			screen.parent("header");
+			background(BG_COLOR);
+			var botton = createButton("Click!");
+			botton.mousePressed(generate);
+		}
+
+		function generate(){
+			var motSuivant = "";
+			nbItter++;
+			for (var i = 0; i < mot.length; i++) {
+				var c = mot.charAt(i);
+				var test = false;
+				for (var j = 0; j < regles.length; j++) {
+					if (c == regles[j].in) {
+						test = true;
+						motSuivant += regles[j].out;break;
+					}
+				}
+				if (!test) {
+					motSuivant += c;
+				}
+			}
+			mot = motSuivant;
+			tortue();
+			createP(mot);
+
+		}
+		function tortue(){
+			background(BG_COLOR);
+			translate(width/16,height/16);			
+			stroke(color);
+				var l = longueur;
+			for (var i = 0; i < mot.length; i++) {	
+
+				
+
+				if (c == 'f') {
+			      line(0, 0, 0, -l);
+			      translate(0, -l);
+			    } else if (c == 'F') {
+			      translate(0, -l);
+			    } else if (c == '+') {
+			      rotate(angle);
+			    } else if (c == '-') {
+			      rotate(-angle);
+			    } else if (c == '[') {
+			      push();
+			    } else if (c == ']') {
+			      pop();
+			    }
+
+			}
+		}
