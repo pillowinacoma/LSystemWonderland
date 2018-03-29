@@ -1,6 +1,6 @@
 @font-face{
       font-family: Lobster;
-        src: url("fonts/Lobster/Lobster-Regular.ttf");
+      src: "fonts/lobster/lobster-regular.ttf";
     }
     .welcome{
       width: 50%;
