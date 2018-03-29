@@ -1,6 +1,6 @@
 @font-face{
       font-family: Lonbster;
-        src: "fonts/Lobster/Lobster-Regular.ttf";
+        src: url("fonts/Lobster/Lobster-Regular.ttf");
     }
     .welcome{
       width: 50%;
