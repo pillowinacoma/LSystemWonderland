@@ -2,16 +2,21 @@
 <html>
 <head>
 	<title>Welcome</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
+	<script src="js/script1.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/mainPage.css">
 </head>
 <body>
+	<div id="background"></div>
 	<div class="welcome">
-		<p style="font-family: Lobster">welcome</p>
+		<p id="welcome" style="font-family: Lobster">welcome</p>
 	</div>
 	<table class="redirect">
 		<tr>
 			<td><div>
-				<a class="goto" href="/tutorial/index.html">You're new to L-systems</a>
+				<a class="goto" href="tutorial/index.html">You're new to L-systems</a>
 			</div></td>
 			<td><div>
 				<a class="goto" href="studio/index.html">you're familiar with L-systems</a>
