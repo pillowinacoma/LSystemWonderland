@@ -11,18 +11,21 @@
     .welcome p{
       color: rgb(64,20,44);
       font-size: 72px;
+      font-family: Lobster;
     }
     .redirect{
       width: 50%;
-      margin: auto;
+      margin: 30% 25% 0% 25%;
       text-align: center;
       font-family: Lobster;
       font-size: 20px;
       position: relative;
     }
     .goto{
+      margin: 0%;
       text-decoration:none;
       position: relative;
+      border-radius: 25px;
     }
     .goto:link, .goto:visited{
       color: rgb(64,20,44);
@@ -31,7 +34,7 @@
 
     }
     .goto:hover, .goto:active{
-      color: white;
+      color: rgb(217,205,145);
       padding: 14px 25px;
       background-color: rgb(64,20,44);
     }
