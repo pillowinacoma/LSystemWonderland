@@ -2,6 +2,9 @@
       font-family: lobster;
       src: url("../fonts/lobster/lobster-regular.ttf");
     }
+    body{
+      background-color: rgb(217,205,145);
+    }
     .welcome{
       width: 50%;
       margin: auto;

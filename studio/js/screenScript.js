@@ -1,92 +1,48 @@
-var rotationCoeff = 0;
+//global init variables
 var animating = true;
-var initAngle = 0;
-var length = 100;
-var rotationAngle = 60;
-var Xmax = 0,Xmin = 0,Ymax = 0,Ymin = 0;
 var BG_COLOR = 51;
 var TITLE1_TRANSPARENCY = 0;
-var axiom = "f",word,nbRep = 0;
-//var centeringX = width/16;
-//var centeringY = height/16;
+var keyValue;
+//motion
+var bigW,bigH;
+var zoom = 1;
+//global L-system variables
+var axiom,nbRep = 0;
+var initAngle = 0;
+var alpha = 90;
+var dist = 50;
+var rules;
+var nbRep;
+var grammar,turtle;
+/*
+float alpha;
+float d;
+float x0;
+float y0;
+float h0;*/
 
-function preload(){
-	
-}
 function setup(){
 	var screen = createCanvas(2*windowWidth/3,windowHeight);
 	screen.parent("header");
 	background(BG_COLOR);
-	//noLoop();
+	initKochSnowflake();
+	grammar = new Grammar(axiom);
+	bigW = width/2;
+	bigH = height/2;
 }
 function draw(){
-	if (animating){
-		push();
-			animating = false;
-		pop();
+	scale(zoom);
+	translate(bigW,bigH);
+}
+function generate(){
+	for (var i = 0; i < rules.length; i++) {
+		grammar.addRule(rules[i].charAt(0),rules[i].substring(3));
 	}
-	else {
-		background(BG_COLOR);
-		noLoop();
-		var grammar = new Grammar(axiom);
-		document.getElementById('submit').onclick = function(){
+	grammar.applyRules();
 
-			if (document.getElementsByName('axiom').value != null) {
-				axiom = document.getElementByName('axiom').value;
-			}
-				var grammar = new Grammar('axiom');
-			if (document.getElementsByName('angle').value != null) {
-				rotationAngle = parseFloat(document.getElementByName('angle').value);
-			}
-			if (document.getElementsByName('rules').value != null) {
-				var ruleTable = document.getElementByName('rules').value.split("\n");
-				for (var i = 0; i < ruleTable.length; i++) {
-					grammar.addRule(ruleTable[i].charAt(0),ruleTable.substring(3));
-				}
-			}
-		}
-			var turtle = new Turtle(length,radians(rotationAngle));
-			print(turtle);
-			print(grammar);
-//TODO ---> translate and rotate to place the shape in the best place 
-			translate(width/2,height);
-			turtle.drawSys(grammar.word);
-	}
-}
-function sysGen(){
-	var nextWord = "";
-	nbRep++;
-	for (var i = 0; i < word.length; i++) {
-		
-	}
-}
-function shapeMesure(word,initAngle){
-	var angle = initAngle;
-	var len = -length;
-	var _Xmax = 0,_Xmin = 0,_Ymax = 0,_Ymin = 0;
-	for (var i = 0; i < word.length; i++) {
-		var c = word.charAt(i);
-		if(c == 'f' || c == 'F'){
-			if (_Xmin > cos(angle)/len)
-				_Xmin = cos(angle)/len;
-			else if(_Xmax < cos(angle)/len)
-				_Xmax = cos(angle)/len;
-			if (_Ymin > sin(angle)/len)
-				_Ymin = sin(angle)/len;
-			else if(_Ymax < sin(angle)/len)
-				_Ymax = sin(angle)/len;
-		}
-		else if(c == '+'){
-			angle += rotationAngle;
-		}
-		else if(c == '-'){
-			angle -= rotationAngle;
-		}
-	}
-	Ymin = _Ymin;
-	Ymax = _Ymax;
-	Xmin = _Xmin;
-	Xmax = _Xmax;
+	createP(grammar.word);
+	turtle = new Turtle(dist,radians(alpha));
+	turtle.drawSys(grammar.word);
 }
 class Turtle{
 	constructor(stepLength,rotationAngle){
@@ -120,9 +76,9 @@ class Turtle{
 			    } else if (c == 'F') {		//invisible step
 			      translate(0, -len);
 			    } else if (c == '+') {		//turn "right" by rotationAngle
-			      rotate(rotationAngle);			
+			      rotate(this._rotationAngle);			
 			    } else if (c == '-') {		//turn "left" by rotationAngle
-			      rotate(-rotationAngle);
+			      rotate(-this._rotationAngle);
 			    } else if (c == '[') {		//save current position
 			      push();
 			    } else if (c == ']') {		//return to the last saved position
@@ -147,22 +103,22 @@ class Turtle{
 class Grammar{
 	constructor(axiom){
 		this._word = axiom;
-		this._rules = [];
+		this._rules = new Array();
 	}
 	addRule(predec,succ){
-		_rules[predec] = succ;
+		this._rules[predec] = succ;
 	}
 	applyRules(){
 		var result = "";
-		for (var i = 0; i < _word.length; i++) {
-			if(_rules[_word.charAt(i)] != null){
-				result += _rules[_word.charAt(i)];
+		for (var i = 0; i < this._word.length; i++) {
+			if(this._rules[this._word.charAt(i)] != null){
+				result += this._rules[this._word.charAt(i)];
 			}
 			else{
-				result += _word.charAt(i);
+				result += this._word.charAt(i);
 			}
 		}
-		_word = result;
+		this._word = result;
 	}
 	get word(){
 		return this._word;
@@ -177,6 +133,27 @@ class Grammar{
 		this._rules = rules;
 	}
 }
-function windowResized() {
-  resizeCanvas(2*windowWidth/3,windowHeight);
+function mouseDragged(){
+	bigW = mouseX;
+	bigH = mouseY;
+	turtle.drawSys(grammar.word);
+}
+function initKochSnowflake(){
+	axiom = "f++f++f";
+	rules = ["f->f-f++f-f"];
+	dist = 2.8;
+	alpha = 60;
+}
+function keyPressed() {
+  if (keyCode === ENTER) {
+    generate();
+  }
+  else if (keyCode === LEFT_ARROW) {if(keyIsPressed == true)bigW--;turtle.drawSys(grammar.word);}
+  else if (keyCode === RIGHT_ARROW) {if(keyIsPressed == true)bigW++;turtle.drawSys(grammar.word);}
+  else if (keyCode === UP_ARROW) {if(keyIsPressed == true)bigH--;turtle.drawSys(grammar.word);}
+  else if (keyCode === DOWN_ARROW) {if(keyIsPressed == true)bigH++;turtle.drawSys(grammar.word);}
+}
+function mouseWheel(event) {
+  zoom += 0.1 * event.delta;
+  turtle.drawSys(grammar.word);
 }

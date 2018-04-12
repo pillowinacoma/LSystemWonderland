@@ -8,12 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
     <!--STYLE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-    <style type="text/css">
-    	canvas[id='defaultCanvas0']{
-    		position: fixed;
-    		top: 0px;
-    	}
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<table id="studio" >
@@ -26,11 +21,12 @@
 							<tr><td>Axiom</td><td><input type="text" name="axiom" placeholder="default value : f"></td></tr>
 							<tr><td>Rotation angle</td><td><input type="text" name="angle" placeholder="default value : 60°"></td></tr>
 							<tr><td>Rules</td><td><textarea rows="4" cols="33" name="rules" placeholder="Alphabet->RULE"></textarea></td></tr>
-							<tr><td><input type="Button" id="submit" value="Create now!"> <input type="reset" name="reset" value="Reset"></td>
-								<td><input type="Button" name="Boom" value="Boom"></td></tr>
+							<tr><td colspan="2"><input type="Button" id="submit" class="Button" value="Create now!">
+									<input type="reset" class="Button" name="reset" value="Reset">
+									<input type="Button" id="Boom"  class="Button"value="Boom"></td></tr>
 						</table>
 					</fieldset>
-					<fieldset>
+					<fieldset style="display: none;">
 						<table>
 							<tr><th colspan="2" style="text-align: center;">Samples</th></tr>
 							<tr><td><input type="button" name="dragonCurve" value="Dragon curve"></td><td><img src="images/dragonCurve.jpeg"></td></tr>
