@@ -2,7 +2,6 @@ var BG_COLOR;
 var HEAD_TRANSPARENCY = 255;
 var corvinus_skyline_font,huskystash;
 var Y_gunspos,X_gunspos,X_npos,Y_npos,logoX,logoY;
-var HEAD_SIZE = 300;
 var lineW = 0;
 var gnrLOGO;
 var nothingindice = 0;
@@ -47,25 +46,26 @@ function draw(){
 		text(gunNroses,X_gunspos,Y_gunspos);
 		X_gunspos+=windowWidth/120 - X_gunspos/100;
 		move+=6;
+		/*To The \n Studio*/
 		if(DBtextcount>=1){
 			fill(141,166,129,abs(move/3));
 			textSize(height/4)				
 			textFont(huskystash);
 			textAlign(LEFT);
-			text("S",textWidth(""),0);
+			text("S",textWidth(""),textWidth("S"));
 			textSize(height/8);
 			text("To the",textWidth(""),-textWidth("S")-textWidth("S")/2);
 			textSize(height/4);
-			if (DBtextcount >=50) {
-				text("t",textWidth("S"),0);
-				if (DBtextcount >=150) {
-					text("u",textWidth("St"),0);
-					if (DBtextcount >=250) {
-						text("d",textWidth("Stu"),0);
-						if (DBtextcount >=350) {
-							text("i",textWidth("Stud"),0);
-							if (DBtextcount >=450) {
-								text("o",textWidth("Studi"),0);
+			if (3*X_gunspos/3 >=width/8) {
+				text("t",textWidth("S"),textWidth("S"));
+				if (3*X_gunspos/3 >=2*width/8) {
+					text("u",textWidth("St"),textWidth("S"));
+					if (3*X_gunspos/3 >=3*width/8) {
+						text("d",textWidth("Stu"),textWidth("S"));
+						if (3*X_gunspos/3 >=4*width/8) {
+							text("i",textWidth("Stud"),textWidth("S"));
+							if (3*X_gunspos/3 >=5*width/8) {
+								text("o",textWidth("Studi"),textWidth("S"));
 							}
 						}
 					}

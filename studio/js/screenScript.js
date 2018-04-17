@@ -11,21 +11,16 @@ var axiom,nbRep = 0;
 var initAngle = 0;
 var alpha = 90;
 var dist = 50;
-var rules;
+var rules = [];
 var nbRep;
 var grammar,turtle;
-/*
-float alpha;
-float d;
-float x0;
-float y0;
-float h0;*/
 
 function setup(){
 	var screen = createCanvas(2*windowWidth/3,windowHeight);
 	screen.parent("header");
+	//screen.mouseOver(mouseWheel);
 	background(BG_COLOR);
-	initKochSnowflake();
+	initGosperCurve();
 	grammar = new Grammar(axiom);
 	bigW = width/2;
 	bigH = height/2;
@@ -39,8 +34,6 @@ function generate(){
 		grammar.addRule(rules[i].charAt(0),rules[i].substring(3));
 	}
 	grammar.applyRules();
-
-	createP(grammar.word);
 	turtle = new Turtle(dist,radians(alpha));
 	turtle.drawSys(grammar.word);
 }
@@ -70,10 +63,10 @@ class Turtle{
 
 		for(var i = 0 ; i < word.length ; i++){
 			 var c = word.charAt(i);
-				if (c == 'f') {				//move one step and draw a line
+				if (c == 'F') {				//move one step and draw a line
 			      line(0, 0, 0, -len);
 			      translate(0, -len);
-			    } else if (c == 'F') {		//invisible step
+			    } else if (c == 'f') {		//invisible step
 			      translate(0, -len);
 			    } else if (c == '+') {		//turn "right" by rotationAngle
 			      rotate(this._rotationAngle);			
@@ -134,15 +127,10 @@ class Grammar{
 	}
 }
 function mouseDragged(){
-	bigW = mouseX;
-	bigH = mouseY;
+	bigW -= (width/2- mouseX)/100;
+	bigH -= (height/2- mouseY)/100;
 	turtle.drawSys(grammar.word);
-}
-function initKochSnowflake(){
-	axiom = "f++f++f";
-	rules = ["f->f-f++f-f"];
-	dist = 2.8;
-	alpha = 60;
+	return false;
 }
 function keyPressed() {
   if (keyCode === ENTER) {
@@ -154,6 +142,95 @@ function keyPressed() {
   else if (keyCode === DOWN_ARROW) {if(keyIsPressed == true)bigH++;turtle.drawSys(grammar.word);}
 }
 function mouseWheel(event) {
-  zoom += 0.1 * event.delta;
-  turtle.drawSys(grammar.word);
+	if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height ){
+	  zoom += 0.01 * event.delta;
+	  turtle.drawSys(grammar.word);
+	}
 }
+//------------------------------------------------------------------------------------------------------------
+function initKochSnowflake(){
+  axiom = "F++F++F";
+  rules = ["F->F-F++F-F"];
+  dist = 2.8;
+  alpha = 60;
+}
+function initSerpinskiCurve() {
+  axiom = "F";
+  rules = ["F->G-F-G","G->F+G+F"];
+  dist = 3;
+  alpha = 60;
+}
+
+function initDragonCurve() {
+  axiom = "F";
+  rules = ["F->F+G+","G->-F-G"];
+  dist = 8;
+  alpha = 90;
+}
+
+function initGosperCurve() {
+  axiom = "F";
+  rules = ["F->F+G++G-F--FF-G+","G->-F+GG++G+F--F-G"];
+  dist = 5;
+  alpha = 60;
+}
+
+function initIslandsAndLakes() {
+  axiom = "F+F+F+F";
+  rules = ["F->F+f-FF+F+FF+Ff+FF-f+FF-F-FF-Ff-FFF","f->ffffff"];
+  dist = 2;
+  alpha = 90;
+}
+
+function initPlant1() {
+  axiom = "F";
+  rules = ["F->F[+F]F[-F]F"];
+  dist = 3;
+  alpha = 25.7;
+}
+
+function initPlant2() {
+  axiom = "F";
+  rules = ["F->F[+F]F[-F][F]"];
+  dist = 12;
+  alpha = 20;
+}
+
+function initPlant3() {
+  axiom = "F";
+  rules = ["F->FF-[-F+F+F]+[+F-F-F]"];
+  dist = 13;
+  alpha = 20;
+}
+
+function initPlant4() {
+  axiom = "X";
+  rules = ["X->F[+X]F[-X]+X","F->FF"];
+  dist = 3;
+  alpha = 20;
+}
+
+function initPlant5() {
+  axiom = "X";
+  rules = ["X->F[+X][-X]FX","F->FF"];
+  dist = 3;
+  alpha = 25.7;
+}
+
+function initPlant6() {
+  axiom = "X";
+  rules = ["X->F[-X][X]F[-X]+FX","F->FF"];
+  dist = 4.75;
+  alpha = 22.5;
+}
+document.getElementById('kochSnowflake').onclick = function(){initKochSnowflake();}
+document.getElementById('SerpinskiCurve').onclick = function(){initSerpinskiCurve();}
+document.getElementById('DragonCurve').onclick = function(){initDragonCurve();}
+document.getElementById('GosperCurve').onclick = function(){initGosperCurve();}
+document.getElementById('IslandsAndLakes').onclick = function(){initIslandsAndLakes();}
+document.getElementById('Plant1').onclick = function(){initPlant1();}
+document.getElementById('Plant2').onclick = function(){initPlant2();}
+document.getElementById('Plant3').onclick = function(){initPlant3();}
+document.getElementById('Plant4').onclick = function(){initPlant4();}
+document.getElementById('Plant5').onclick = function(){initPlant5();}
+document.getElementById('Plant6').onclick = function(){initPlant6();}

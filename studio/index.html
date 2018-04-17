@@ -4,9 +4,9 @@
 	<title>L-System Wonderland</title>
 	<meta charset="utf-8">
     <!--P5*JS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script>
+	<script src="../p5/p5.min.js"></script>
+    <script src="../p5/addons/p5.dom.min.js"></script>
+    <script src="../p5/addons/p5.sound.min.js"></script>
     <!--STYLE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -15,27 +15,55 @@
 		<tr>
 			<td>
 				<form>
-					<fieldset>
+					<fieldset id="menu">
 						<table>
 							<tr><th colspan="2" style="text-align: center;">Make Your own L-System</th></tr>
 							<tr><td>Axiom</td><td><input type="text" name="axiom" placeholder="default value : f"></td></tr>
 							<tr><td>Rotation angle</td><td><input type="text" name="angle" placeholder="default value : 60°"></td></tr>
 							<tr><td>Rules</td><td><textarea rows="4" cols="33" name="rules" placeholder="Alphabet->RULE"></textarea></td></tr>
-							<tr><td colspan="2"><input type="Button" id="submit" class="Button" value="Create now!">
+							<tr><td id="Buttons" colspan="2">
+									<input type="Button" id="button" class="Button" value="Create now!">
 									<input type="reset" class="Button" name="reset" value="Reset">
-									<input type="Button" id="Boom"  class="Button"value="Boom"></td></tr>
+								</td>
+							</tr>
 						</table>
 					</fieldset>
-					<fieldset style="display: none;">
+					<fieldset>
 						<table>
 							<tr><th colspan="2" style="text-align: center;">Samples</th></tr>
-							<tr><td><input type="button" name="dragonCurve" value="Dragon curve"></td><td><img src="images/dragonCurve.jpeg"></td></tr>
-							<tr><td><input type="button" name="rings" value="Koch curve"></td><td><img src="images/rings.png" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="hilbertCurve" value="Hilbert curve"></td><td><img src="images/hilbertcurve.png" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="kochSnowflake" value="Koch snowflake"></td><td><img src="images/koch_snowflake.gif" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="sierpinskicarpet" value="Sierpinski's carpet"></td><td><img src="images/sierpinskicarpet.gif" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="sierpinskitriangle" value="Sierpinski's triangle"></td><td><img src="images/SierpinskiTriangle.svg.png" style="width: 140px;"></td></tr>
-							<tr><td><input type="button" name="spacefillingtree" value="Space-filling tree"></td><td><img src="images/Space_Filling_Tree_Square6.png" style="width: 140px;"></td></tr>
+							<tr><td><input type="button" id="kochSnowflake" value="Koch Snowflake"></td>
+								<td><img style="max-width: 10em" src="images/kochSnowflake.png"></td>
+							</tr>
+							<tr><td><input type="button" id="SerpinskiCurve" value="Serpinski Curve"></td>
+								<td><img style="max-width: 10em" src="images/SerpinskiCurve.png"></td>
+							</tr>
+							<tr><td><input type="button" id="DragonCurve" value="Dragon Curve"></td>
+								<td><img style="max-width: 10em" src="images/DragonCurve.png"></td>
+							</tr>
+							<tr><td><input type="button" id="GosperCurve" value="Gosper Curve"></td>
+								<td><img style="max-width: 10em" src="images/GosperCurve.png"></td>
+							</tr>
+							<tr><td><input type="button" id="IslandsAndLakes" value="Islands And Lakes"></td>
+								<td><img style="max-width: 10em" src="images/IslandsAndLakes.png"></td>
+							</tr>
+							<tr><td><input type="button" id="Plant1" value="Plant1"></td>
+								<td><img style="max-width: 10em" src="images/Plant1.png"></td>
+							</tr>
+							<tr><td><input type="button" id="Plant2" value="Plant2"></td>
+								<td><img style="max-width: 10em" src="images/Plant2.png"></td>
+							</tr>
+							<tr><td><input type="button" id="Plant3" value="Plant3"></td>
+								<td><img style="max-width: 10em" src="images/Plant3.png"></td>
+							</tr>
+							<tr><td><input type="button" id="Plant4" value="Plant4"></td>
+								<td><img style="max-width: 10em" src="images/Plant4.png"></td>
+							</tr>
+							<tr><td><input type="button" id="Plant5" value="Plant5"></td>
+								<td><img style="max-width: 10em" src="images/Plant5.png"></td>
+							</tr>
+							<tr><td><input type="button" id="Plant6" value="Plant6"></td>
+								<td><img style="max-width: 10em" src="images/Plant6.png"></td>
+							</tr>
 						</table>
 					</fieldset>
 				</form>
