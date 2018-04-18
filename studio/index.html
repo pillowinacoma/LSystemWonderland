@@ -18,11 +18,12 @@
 					<fieldset id="menu">
 						<table>
 							<tr><th colspan="2" style="text-align: center;">Make Your own L-System</th></tr>
-							<tr><td>Axiom</td><td><input type="text" name="axiom" placeholder="default value : f"></td></tr>
-							<tr><td>Rotation angle</td><td><input type="text" name="angle" placeholder="default value : 60°"></td></tr>
-							<tr><td>Rules</td><td><textarea rows="4" cols="33" name="rules" placeholder="Alphabet->RULE"></textarea></td></tr>
+							<tr><td>Axiom</td><td><input type="text" id="axiom" ></td></tr>
+							<tr><td>Rotation angle</td><td><input type="text" id="angle"></td></tr>
+							<tr><td>step length</td><td><input type="text" id="dist" ></td></tr>
+							<tr><td>Rules</td><td><textarea rows="4" cols="33" id="rules" placeholder="Alphabet->RULE" ></textarea></td></tr>
 							<tr><td id="Buttons" colspan="2">
-									<input type="Button" id="button" class="Button" value="Create now!">
+									<input type="button" id="create" class="Button" value="Create now!">
 									<input type="reset" class="Button" name="reset" value="Reset">
 								</td>
 							</tr>

@@ -28,6 +28,7 @@ function setup(){
 function draw(){
 	scale(zoom);
 	translate(bigW,bigH);
+	rotate(radians(initAngle));
 }
 function generate(){
 	for (var i = 0; i < rules.length; i++) {
@@ -127,25 +128,32 @@ class Grammar{
 	}
 }
 function mouseDragged(){
-	bigW -= (width/2- mouseX)/100;
-	bigH -= (height/2- mouseY)/100;
-	turtle.drawSys(grammar.word);
+	
+	var speedX = (mouseX - pmouseX);
+	var speedY = (mouseY - pmouseY);
+	if(keyIsPressed && keyCode === CONTROL){	
+		initAngle += (speedX + speedY)/10;
+		turtle.drawSys(grammar.word);
+	}
+	if(keyCode !== CONTROL){
+		bigW += (speedX);
+		bigH += (speedY);
+		turtle.drawSys(grammar.word);
+	}
 	return false;
 }
 function keyPressed() {
   if (keyCode === ENTER) {
     generate();
   }
-  else if (keyCode === LEFT_ARROW) {if(keyIsPressed == true)bigW--;turtle.drawSys(grammar.word);}
-  else if (keyCode === RIGHT_ARROW) {if(keyIsPressed == true)bigW++;turtle.drawSys(grammar.word);}
-  else if (keyCode === UP_ARROW) {if(keyIsPressed == true)bigH--;turtle.drawSys(grammar.word);}
-  else if (keyCode === DOWN_ARROW) {if(keyIsPressed == true)bigH++;turtle.drawSys(grammar.word);}
+  return false;
 }
 function mouseWheel(event) {
 	if(mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height ){
 	  zoom += 0.01 * event.delta;
 	  turtle.drawSys(grammar.word);
 	}
+  return false;
 }
 //------------------------------------------------------------------------------------------------------------
 function initKochSnowflake(){
@@ -153,12 +161,14 @@ function initKochSnowflake(){
   rules = ["F->F-F++F-F"];
   dist = 2.8;
   alpha = 60;
+  initAngle = 0;
 }
 function initSerpinskiCurve() {
   axiom = "F";
   rules = ["F->G-F-G","G->F+G+F"];
-  dist = 3;
+  dist = 5;
   alpha = 60;
+  initAngle = -alpha/2;
 }
 
 function initDragonCurve() {
@@ -166,6 +176,7 @@ function initDragonCurve() {
   rules = ["F->F+G+","G->-F-G"];
   dist = 8;
   alpha = 90;
+  initAngle = 0;
 }
 
 function initGosperCurve() {
@@ -173,6 +184,7 @@ function initGosperCurve() {
   rules = ["F->F+G++G-F--FF-G+","G->-F+GG++G+F--F-G"];
   dist = 5;
   alpha = 60;
+  initAngle = 0;
 }
 
 function initIslandsAndLakes() {
@@ -180,6 +192,7 @@ function initIslandsAndLakes() {
   rules = ["F->F+f-FF+F+FF+Ff+FF-f+FF-F-FF-Ff-FFF","f->ffffff"];
   dist = 2;
   alpha = 90;
+  initAngle = 0;
 }
 
 function initPlant1() {
@@ -187,6 +200,7 @@ function initPlant1() {
   rules = ["F->F[+F]F[-F]F"];
   dist = 3;
   alpha = 25.7;
+  initAngle = 0;
 }
 
 function initPlant2() {
@@ -194,6 +208,7 @@ function initPlant2() {
   rules = ["F->F[+F]F[-F][F]"];
   dist = 12;
   alpha = 20;
+  initAngle = 0;
 }
 
 function initPlant3() {
@@ -201,6 +216,7 @@ function initPlant3() {
   rules = ["F->FF-[-F+F+F]+[+F-F-F]"];
   dist = 13;
   alpha = 20;
+  initAngle = 0;
 }
 
 function initPlant4() {
@@ -208,6 +224,7 @@ function initPlant4() {
   rules = ["X->F[+X]F[-X]+X","F->FF"];
   dist = 3;
   alpha = 20;
+  initAngle = 0;
 }
 
 function initPlant5() {
@@ -215,6 +232,7 @@ function initPlant5() {
   rules = ["X->F[+X][-X]FX","F->FF"];
   dist = 3;
   alpha = 25.7;
+  initAngle = 0;
 }
 
 function initPlant6() {
@@ -222,6 +240,7 @@ function initPlant6() {
   rules = ["X->F[-X][X]F[-X]+FX","F->FF"];
   dist = 4.75;
   alpha = 22.5;
+  initAngle = 0;
 }
 document.getElementById('kochSnowflake').onclick = function(){initKochSnowflake();}
 document.getElementById('SerpinskiCurve').onclick = function(){initSerpinskiCurve();}
@@ -234,3 +253,9 @@ document.getElementById('Plant3').onclick = function(){initPlant3();}
 document.getElementById('Plant4').onclick = function(){initPlant4();}
 document.getElementById('Plant5').onclick = function(){initPlant5();}
 document.getElementById('Plant6').onclick = function(){initPlant6();}
+document.getElementById('create').onclick = function(){
+	axiom = document.getElementById('axiom').value;
+	alpha = parseFloat(document.getElementById('angle').value);
+	dist = parseFloat(document.getElementById('dist').value);
+	rules = split(document.getElementById('rules').value,"\n");
+}
