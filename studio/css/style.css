@@ -1,4 +1,19 @@
 canvas[id='defaultCanvas0']{
-    		position: fixed;
+    		position: absolute;
     		top: 0px;
+        margin: 0px 0px 0px 0px ;
+        padding: 0px 0px 0px 0px ;
     	}
+table[id="studio"]{
+  width: 50%;
+  margin: auto;
+}
+.formButts{
+  width: 100%;
+  align-self: center;
+  display: block;
+}
+
+p[id='nbRepP']{
+  text-decoration: line-through;
+}

@@ -3,28 +3,28 @@
 <head>
 	<title>L-System Wonderland</title>
 	<meta charset="utf-8">
-    <!--P5*JS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-	<script src="../p5/p5.min.js"></script>
-    <script src="../p5/addons/p5.dom.min.js"></script>
-    <script src="../p5/addons/p5.sound.min.js"></script>
-    <!--STYLE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!--STYLE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+	<script src="js/sampleManagement.js"></script>
 	<table id="studio" >
 		<tr>
 			<td>
-				<form>
+				<form action="screen.html.php" method="get" onsubmit="rulesIntoArray();">
 					<fieldset id="menu">
 						<table>
 							<tr><th colspan="2" style="text-align: center;">Make Your own L-System</th></tr>
-							<tr><td>Axiom</td><td><input type="text" id="axiom" ></td></tr>
-							<tr><td>Rotation angle</td><td><input type="text" id="angle"></td></tr>
-							<tr><td>step length</td><td><input type="text" id="dist" ></td></tr>
-							<tr><td>Rules</td><td><textarea rows="4" cols="33" id="rules" placeholder="Alphabet->RULE" ></textarea></td></tr>
+							<tr><td>Axiom</td><td><input type="text" id="axiom" name="axiom" required></td></tr>
+							<tr><td>Rotation angle</td><td><input type="text" id="angle" name="angle" required></td></tr>
+							<tr><td>step length</td><td><input type="text" id="dist" name="dist" required></td></tr>
+							<tr><td>Rules</td>
+									<td><textarea rows="4" cols="33" id="rules" name="rules" placeholder="Alphabet->RULE" required></textarea>
+											<textarea name="realRules" id="realRules" hidden></textarea>
+							</td></tr>
 							<tr><td id="Buttons" colspan="2">
-									<input type="button" id="create" class="Button" value="Create now!">
-									<input type="reset" class="Button" name="reset" value="Reset">
+									<input type="submit" id="create" class="formButts" value="Create now!">
+									<input type="reset"  id="reset"  class="formButts" value="Reset">
 								</td>
 							</tr>
 						</table>
@@ -32,47 +32,43 @@
 					<fieldset>
 						<table>
 							<tr><th colspan="2" style="text-align: center;">Samples</th></tr>
-							<tr><td><input type="button" id="kochSnowflake" value="Koch Snowflake"></td>
+							<tr><td><input type="button" id="kochSnowflake" value="Koch Snowflake" onclick = "initKochSnowflake();"></td>
 								<td><img style="max-width: 10em" src="images/kochSnowflake.png"></td>
 							</tr>
-							<tr><td><input type="button" id="SerpinskiCurve" value="Serpinski Curve"></td>
+							<tr><td><input type="button" id="SerpinskiCurve" value="Serpinski Curve" onclick = "initSerpinskiCurve();"></td>
 								<td><img style="max-width: 10em" src="images/SerpinskiCurve.png"></td>
 							</tr>
-							<tr><td><input type="button" id="DragonCurve" value="Dragon Curve"></td>
+							<tr><td><input type="button" id="DragonCurve" value="Dragon Curve" onclick = "initDragonCurve();"></td>
 								<td><img style="max-width: 10em" src="images/DragonCurve.png"></td>
 							</tr>
-							<tr><td><input type="button" id="GosperCurve" value="Gosper Curve"></td>
+							<tr><td><input type="button" id="GosperCurve" value="Gosper Curve" onclick = "initGosperCurve();"></td>
 								<td><img style="max-width: 10em" src="images/GosperCurve.png"></td>
 							</tr>
-							<tr><td><input type="button" id="IslandsAndLakes" value="Islands And Lakes"></td>
+							<tr><td><input type="button" id="IslandsAndLakes" value="Islands And Lakes" onclick = "initIslandsAndLakes();"></td>
 								<td><img style="max-width: 10em" src="images/IslandsAndLakes.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant1" value="Plant1"></td>
+							<tr><td><input type="button" id="Plant1" value="Plant1" onclick = "initPlant1();"></td>
 								<td><img style="max-width: 10em" src="images/Plant1.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant2" value="Plant2"></td>
+							<tr><td><input type="button" id="Plant2" value="Plant2" onclick = "initPlant2();"></td>
 								<td><img style="max-width: 10em" src="images/Plant2.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant3" value="Plant3"></td>
+							<tr><td><input type="button" id="Plant3" value="Plant3" onclick = "initPlant3();"></td>
 								<td><img style="max-width: 10em" src="images/Plant3.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant4" value="Plant4"></td>
+							<tr><td><input type="button" id="Plant4" value="Plant4" onclick = "initPlant4();"></td>
 								<td><img style="max-width: 10em" src="images/Plant4.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant5" value="Plant5"></td>
+							<tr><td><input type="button" id="Plant5" value="Plant5" onclick = "initPlant5();"></td>
 								<td><img style="max-width: 10em" src="images/Plant5.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant6" value="Plant6"></td>
+							<tr><td><input type="button" id="Plant6" value="Plant6" onclick = "initPlant6();"></td>
 								<td><img style="max-width: 10em" src="images/Plant6.png"></td>
 							</tr>
 						</table>
 					</fieldset>
 				</form>
-			</td>
-			<td>
-				<div id="header"> <script src="js/screenScript.js"></script></div>
-			</td>
-		</tr>
+			</tr>
 	</table>
 </body>
 </html>

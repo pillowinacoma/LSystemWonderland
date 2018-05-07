@@ -3,27 +3,42 @@ var animating = true;
 var BG_COLOR = 51;
 var TITLE1_TRANSPARENCY = 0;
 var keyValue;
+var stepColor = 0;
 //motion
 var bigW,bigH;
 var zoom = 1;
 //global L-system variables
-var axiom,nbRep = 0;
+var nbRep = 0;
 var initAngle = 0;
-var alpha = 90;
-var dist = 50;
-var rules = [];
 var nbRep;
 var grammar,turtle;
-
+var longueur = dist;
+var angleAlpha = alpha;
+var nbRepP;
 function setup(){
-	var screen = createCanvas(2*windowWidth/3,windowHeight);
-	screen.parent("header");
-	//screen.mouseOver(mouseWheel);
+	var screen = createCanvas(windowWidth*(31/32),windowHeight*(31/32));
+	screen.parent("screen");
+	screen.position(windowWidth/64,windowHeight/64);
 	background(BG_COLOR);
-	initGosperCurve();
-	grammar = new Grammar(axiom);
 	bigW = width/2;
 	bigH = height/2;
+	/*
+	var generationButton = createButton('Genera');
+	generationButton.mousePressed(generate);
+	generationButton.position(screen.position().x+20,screen.position().y+20);*/
+	nbRepP = createP("");
+	nbRepP.position(screen.position().x+20,screen.position().y+20);
+	nbRepP.attribute('id', 'nbRepP');
+	nbRepP.style('color', '#ffffff');
+	nbRepP.style('font-family','sans-serif');
+	currentStep = createP("");
+	currentStep.position(screen.position().x+20,screen.position().y+40);
+	currentStep.attribute('id', 'currentStep');
+	currentStep.style('color', '#ffffff');
+	currentStep.style('font-family','sans-serif');
+	strokeJoin(ROUND);
+	grammar = new Grammar(axiom);
+	turtle = new Turtle(longueur,radians(angleAlpha));
 }
 function draw(){
 	scale(zoom);
@@ -35,8 +50,8 @@ function generate(){
 		grammar.addRule(rules[i].charAt(0),rules[i].substring(3));
 	}
 	grammar.applyRules();
-	turtle = new Turtle(dist,radians(alpha));
 	turtle.drawSys(grammar.word);
+	document.getElementById('nbRepP').innerText = 'size of the word : '+grammar.word.length;
 }
 class Turtle{
 	constructor(stepLength,rotationAngle){
@@ -57,20 +72,19 @@ class Turtle{
 	}
 	drawSys(word){
 		var colors = Array(color(255,255,255),color(255,0,0),color(255,127,0),color(255,255,0),color(0,255,0),color(0,0,255),color(75,0,130),color(143,0,255));
-		var stepColor = 0;
 		background(BG_COLOR);
+		strokeWeight(1);
 		stroke(colors[stepColor]);			//this way we can draw lines in a variation of colors
 		var len = this._stepLength;
-
 		for(var i = 0 ; i < word.length ; i++){
 			 var c = word.charAt(i);
-				if (c == 'F') {				//move one step and draw a line
+				if (c >= 'A' && c <= 'T') {				//move one step and draw a line
 			      line(0, 0, 0, -len);
 			      translate(0, -len);
-			    } else if (c == 'f') {		//invisible step
+			    } else if (c >= 'a' && c <= 't') {		//invisible step
 			      translate(0, -len);
 			    } else if (c == '+') {		//turn "right" by rotationAngle
-			      rotate(this._rotationAngle);			
+			      rotate(this._rotationAngle);
 			    } else if (c == '-') {		//turn "left" by rotationAngle
 			      rotate(-this._rotationAngle);
 			    } else if (c == '[') {		//save current position
@@ -127,21 +141,22 @@ class Grammar{
 		this._rules = rules;
 	}
 }
+
+//------------------------------------------------------------------------------------------------------------
 function mouseDragged(){
-	
 	var speedX = (mouseX - pmouseX);
 	var speedY = (mouseY - pmouseY);
-	if(keyIsPressed && keyCode === CONTROL){	
+	if(keyIsPressed && keyCode === CONTROL){
 		initAngle += (speedX + speedY)/10;
 		turtle.drawSys(grammar.word);
 	}
-	if(keyCode !== CONTROL){
-		bigW += (speedX);
-		bigH += (speedY);
+	else if(!keyIsPressed){
+		bigW += (speedX/zoom);
+		bigH += (speedY/zoom);
 		turtle.drawSys(grammar.word);
 	}
-	return false;
 }
+
 function keyPressed() {
   if (keyCode === ENTER) {
     generate();
@@ -155,107 +170,5 @@ function mouseWheel(event) {
 	}
   return false;
 }
+
 //------------------------------------------------------------------------------------------------------------
-function initKochSnowflake(){
-  axiom = "F++F++F";
-  rules = ["F->F-F++F-F"];
-  dist = 2.8;
-  alpha = 60;
-  initAngle = 0;
-}
-function initSerpinskiCurve() {
-  axiom = "F";
-  rules = ["F->G-F-G","G->F+G+F"];
-  dist = 5;
-  alpha = 60;
-  initAngle = -alpha/2;
-}
-
-function initDragonCurve() {
-  axiom = "F";
-  rules = ["F->F+G+","G->-F-G"];
-  dist = 8;
-  alpha = 90;
-  initAngle = 0;
-}
-
-function initGosperCurve() {
-  axiom = "F";
-  rules = ["F->F+G++G-F--FF-G+","G->-F+GG++G+F--F-G"];
-  dist = 5;
-  alpha = 60;
-  initAngle = 0;
-}
-
-function initIslandsAndLakes() {
-  axiom = "F+F+F+F";
-  rules = ["F->F+f-FF+F+FF+Ff+FF-f+FF-F-FF-Ff-FFF","f->ffffff"];
-  dist = 2;
-  alpha = 90;
-  initAngle = 0;
-}
-
-function initPlant1() {
-  axiom = "F";
-  rules = ["F->F[+F]F[-F]F"];
-  dist = 3;
-  alpha = 25.7;
-  initAngle = 0;
-}
-
-function initPlant2() {
-  axiom = "F";
-  rules = ["F->F[+F]F[-F][F]"];
-  dist = 12;
-  alpha = 20;
-  initAngle = 0;
-}
-
-function initPlant3() {
-  axiom = "F";
-  rules = ["F->FF-[-F+F+F]+[+F-F-F]"];
-  dist = 13;
-  alpha = 20;
-  initAngle = 0;
-}
-
-function initPlant4() {
-  axiom = "X";
-  rules = ["X->F[+X]F[-X]+X","F->FF"];
-  dist = 3;
-  alpha = 20;
-  initAngle = 0;
-}
-
-function initPlant5() {
-  axiom = "X";
-  rules = ["X->F[+X][-X]FX","F->FF"];
-  dist = 3;
-  alpha = 25.7;
-  initAngle = 0;
-}
-
-function initPlant6() {
-  axiom = "X";
-  rules = ["X->F[-X][X]F[-X]+FX","F->FF"];
-  dist = 4.75;
-  alpha = 22.5;
-  initAngle = 0;
-}
-document.getElementById('kochSnowflake').onclick = function(){initKochSnowflake();}
-document.getElementById('SerpinskiCurve').onclick = function(){initSerpinskiCurve();}
-document.getElementById('DragonCurve').onclick = function(){initDragonCurve();}
-document.getElementById('GosperCurve').onclick = function(){initGosperCurve();}
-document.getElementById('IslandsAndLakes').onclick = function(){initIslandsAndLakes();}
-document.getElementById('Plant1').onclick = function(){initPlant1();}
-document.getElementById('Plant2').onclick = function(){initPlant2();}
-document.getElementById('Plant3').onclick = function(){initPlant3();}
-document.getElementById('Plant4').onclick = function(){initPlant4();}
-document.getElementById('Plant5').onclick = function(){initPlant5();}
-document.getElementById('Plant6').onclick = function(){initPlant6();}
-document.getElementById('create').onclick = function(){
-	axiom = document.getElementById('axiom').value;
-	alpha = parseFloat(document.getElementById('angle').value);
-	dist = parseFloat(document.getElementById('dist').value);
-	rules = split(document.getElementById('rules').value,"\n");
-}
