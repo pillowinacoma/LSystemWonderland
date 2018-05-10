@@ -1,3 +1,4 @@
+
 //global init variables
 var animating = true;
 var BG_COLOR = 51;
@@ -22,10 +23,6 @@ function setup(){
 	background(BG_COLOR);
 	bigW = width/2;
 	bigH = height/2;
-	/*
-	var generationButton = createButton('Genera');
-	generationButton.mousePressed(generate);
-	generationButton.position(screen.position().x+20,screen.position().y+20);*/
 	nbRepP = createP("");
 	nbRepP.position(screen.position().x+20,screen.position().y+20);
 	nbRepP.attribute('id', 'nbRepP');
@@ -46,9 +43,10 @@ function draw(){
 	rotate(radians(initAngle));
 }
 function generate(){
-	for (var i = 0; i < rules.length; i++) {
-		grammar.addRule(rules[i].charAt(0),rules[i].substring(3));
-	}
+	/*for (var i = 0; i < rules.length; i++) {
+		grammar.addRule(Object.keys(rules)[i],rules[Object.keys(rules)[i]]);
+	}*/
+	console.log(grammar);
 	grammar.applyRules();
 	turtle.drawSys(grammar.word);
 	document.getElementById('nbRepP').innerText = 'size of the word : '+grammar.word.length;
@@ -85,10 +83,8 @@ class Turtle{
 			      translate(0, -len);
 			    } else if (c == '+') {		//turn "right" by rotationAngle
 			      rotate(this._rotationAngle);
-					} else if (c == '-') {		//turn "left" by rotationAngle
+			    } else if (c == '-') {		//turn "left" by rotationAngle
 			      rotate(-this._rotationAngle);
-					} else if(c == '|'){
-						rotate(PI);
 			    } else if (c == '[') {		//save current position
 			      push();
 			    } else if (c == ']') {		//return to the last saved position
@@ -113,16 +109,26 @@ class Turtle{
 class Grammar{
 	constructor(axiom){
 		this._word = axiom;
-		this._rules = new Array();
-	}
-	addRule(predec,succ){
-		this._rules[predec] = succ;
+		this._rules = rules;
 	}
 	applyRules(){
 		var result = "";
 		for (var i = 0; i < this._word.length; i++) {
 			if(this._rules[this._word.charAt(i)] != null){
-				result += this._rules[this._word.charAt(i)];
+				//result += this._rules[this._word.charAt(i)];
+				var rand = Math.floor(Math.random()*100 + 1);
+				var deb = 0;
+				var fin = 0;
+				for (var j = 0; j < this._rules[this._word.charAt(i)].length && fin <= 100; j++) {
+					fin += this._rules[this._word.charAt(i)][j].probability * 100;
+					if(rand >= deb && rand <= fin){
+						result += this._rules[this._word.charAt(i)][j].rule;
+						break;
+					}
+				}
+				if(fin > 100){
+					result += this._word.charAt(i);
+				}
 			}
 			else{
 				result += this._word.charAt(i);
@@ -172,5 +178,3 @@ function mouseWheel(event) {
 	}
   return false;
 }
-
-//------------------------------------------------------------------------------------------------------------

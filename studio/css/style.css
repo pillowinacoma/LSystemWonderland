@@ -7,13 +7,17 @@ canvas[id='defaultCanvas0']{
 table[id="studio"]{
   width: 50%;
   margin: auto;
+  text-align: center;
 }
 .formButts{
-  width: 100%;
-  align-self: center;
+  width: 50%;
+  margin: auto;
   display: block;
 }
 
 p[id='nbRepP']{
   text-decoration: line-through;
+}
+a{
+  text-decoration: none;
 }

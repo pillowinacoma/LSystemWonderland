@@ -106,12 +106,43 @@ function initPlant6() {
   initAngle = 0;
   putValsInFields();
 }
+//-----------------------------------------------------------------------------------------------------
 
 function rulesIntoArray() {
   var preRules = document.getElementById('rules').value;
   var rules = preRules.split("\n");
-  var after = rules.join("|");
+  var after = rules.join("_");
   document.getElementById('realRules').value = after;
-
-
+}
+function rulesIntoArraySOL() {
+  var preRules = document.getElementById('SOLproba').value;
+  var rules = preRules.split("\n");
+  var after = rules.join("_");
+  document.getElementById('realSOLRules').value = after;
+}
+function affProba() {
+  var probaStat = document.getElementById('SOL').checked;
+  if(probaStat){
+    document.getElementById('SOLRow').hidden = false;
+    document.getElementById('DOLRow').hidden = true;
+    document.getElementById('SOLproba').required = true;
+    document.getElementById('rules').required = false;
+  }
+  else if(!probaStat){
+    document.getElementById('SOLRow').hidden = true;
+    document.getElementById('DOLRow').hidden = false;
+    document.getElementById('SOLproba').required = false;
+    document.getElementById('rules').required = true;
+  }
+}
+function getAction(){
+  var probaStat = document.getElementById('SOL').checked;
+  if(!probaStat){
+    rulesIntoArray();
+    document.getElementById('formLsystem').action = "screenDOL.html.php"
+  }
+  else{
+    rulesIntoArraySOL();
+    document.getElementById('formLsystem').action = "screenSOL.html.php"
+  }
 }

@@ -11,17 +11,34 @@
 	<table id="studio" >
 		<tr>
 			<td>
-				<form action="screen.html.php" method="get" onsubmit="rulesIntoArray();">
+				<form id='formLsystem' method="get" onsubmit="getAction();">
 					<fieldset id="menu">
-						<table>
+						<table style="width:100%;">
 							<tr><th colspan="2" style="text-align: center;">Make Your own L-System</th></tr>
 							<tr><td>Axiom</td><td><input type="text" id="axiom" name="axiom" required></td></tr>
 							<tr><td>Rotation angle</td><td><input type="text" id="angle" name="angle" required></td></tr>
 							<tr><td>step length</td><td><input type="text" id="dist" name="dist" required></td></tr>
-							<tr><td>Rules</td>
-									<td><textarea rows="4" cols="33" id="rules" name="rules" placeholder="Alphabet->RULE" required></textarea>
-											<textarea name="realRules" id="realRules" hidden></textarea>
-							</td></tr>
+							<tr><td>Grammar Type</td>
+									<td>
+											<input type="radio" id="DOL" name="grammarType" value="DOL" onclick="affProba();" checked="checked">
+											<label for="DOL">DOL</label>
+											<input type="radio" id="SOL" name="grammarType" value="SOL" onclick="affProba();">
+											<label for="SOL">SOL</label>
+									</td>
+							</tr>
+							<tr id="SOLRow" hidden>
+								<td>Rules</td>
+								<td>
+									<textarea rows="4" cols="50" id="SOLproba" name="SOLproba" placeholder="Alphabet->RULE,Probability;RULE,Probability"></textarea>
+									<textarea name="realSOLRules" id="realSOLRules" hidden></textarea>
+								</td>
+							</tr>
+							<tr id="DOLRow" >
+								<td>Rules</td>
+								<td><textarea rows="4" cols="50" id="rules" name="rules" placeholder="Alphabet->RULE"></textarea>
+										<textarea name="realRules" id="realRules" hidden></textarea>
+								</td>
+							</tr>
 							<tr><td id="Buttons" colspan="2">
 									<input type="submit" id="create" class="formButts" value="Create now!">
 									<input type="reset"  id="reset"  class="formButts" value="Reset">
@@ -30,39 +47,39 @@
 						</table>
 					</fieldset>
 					<fieldset>
-						<table>
+						<table style="width:100%;">
 							<tr><th colspan="2" style="text-align: center;">Samples</th></tr>
-							<tr><td><input type="button" id="kochSnowflake" value="Koch Snowflake" onclick = "initKochSnowflake();"></td>
+							<tr><td><a href="#"><input type="button" id="kochSnowflake" value="Koch Snowflake" onclick = "initKochSnowflake();"></a></td>
 								<td><img style="max-width: 10em" src="images/kochSnowflake.png"></td>
 							</tr>
-							<tr><td><input type="button" id="SerpinskiCurve" value="Serpinski Curve" onclick = "initSerpinskiCurve();"></td>
+							<tr><td><a href="#"><input type="button" id="SerpinskiCurve" value="Serpinski Curve" onclick = "initSerpinskiCurve();"></a></td>
 								<td><img style="max-width: 10em" src="images/SerpinskiCurve.png"></td>
 							</tr>
-							<tr><td><input type="button" id="DragonCurve" value="Dragon Curve" onclick = "initDragonCurve();"></td>
+							<tr><td><a href="#"><input type="button" id="DragonCurve" value="Dragon Curve" onclick = "initDragonCurve();"></a></td>
 								<td><img style="max-width: 10em" src="images/DragonCurve.png"></td>
 							</tr>
-							<tr><td><input type="button" id="GosperCurve" value="Gosper Curve" onclick = "initGosperCurve();"></td>
+							<tr><td><a href="#"><input type="button" id="GosperCurve" value="Gosper Curve" onclick = "initGosperCurve();"></a></td>
 								<td><img style="max-width: 10em" src="images/GosperCurve.png"></td>
 							</tr>
-							<tr><td><input type="button" id="IslandsAndLakes" value="Islands And Lakes" onclick = "initIslandsAndLakes();"></td>
+							<tr><td><a href="#"><input type="button" id="IslandsAndLakes" value="Islands And Lakes" onclick = "initIslandsAndLakes();"></a></td>
 								<td><img style="max-width: 10em" src="images/IslandsAndLakes.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant1" value="Plant1" onclick = "initPlant1();"></td>
+							<tr><td><a href="#"><input type="button" id="Plant1" value="Plant1" onclick = "initPlant1();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant1.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant2" value="Plant2" onclick = "initPlant2();"></td>
+							<tr><td><a href="#"><input type="button" id="Plant2" value="Plant2" onclick = "initPlant2();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant2.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant3" value="Plant3" onclick = "initPlant3();"></td>
+							<tr><td><a href="#"><input type="button" id="Plant3" value="Plant3" onclick = "initPlant3();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant3.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant4" value="Plant4" onclick = "initPlant4();"></td>
+							<tr><td><a href="#"><input type="button" id="Plant4" value="Plant4" onclick = "initPlant4();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant4.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant5" value="Plant5" onclick = "initPlant5();"></td>
+							<tr><td><a href="#"><input type="button" id="Plant5" value="Plant5" onclick = "initPlant5();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant5.png"></td>
 							</tr>
-							<tr><td><input type="button" id="Plant6" value="Plant6" onclick = "initPlant6();"></td>
+							<tr><td><a href="#"><input type="button" id="Plant6" value="Plant6" onclick = "initPlant6();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant6.png"></td>
 							</tr>
 						</table>
