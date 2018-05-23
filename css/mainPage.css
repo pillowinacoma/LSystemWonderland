@@ -14,13 +14,13 @@
     .welcome p{
       color: rgb(64,20,44);
       font-size: 72px;
-      font-family: Lobster;
+      font-family: lobster;
     }
     .redirect{
       width: 50%;
       margin: 30% 25% 0% 25%;
       text-align: center;
-      font-family: Lobster;
+      font-family: lobster;
       font-size: 20px;
       position: relative;
     }
@@ -47,4 +47,3 @@
       text-align:center;
       position: fixed;
     }
-

@@ -52,6 +52,7 @@ function generate(){
 	grammar.applyRules();
 	turtle.drawSys(grammar.word);
 	document.getElementById('nbRepP').innerText = 'size of the word : '+grammar.word.length;
+	console.log(grammar.word);
 }
 class Turtle{
 	constructor(stepLength,rotationAngle){

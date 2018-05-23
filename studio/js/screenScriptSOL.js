@@ -85,6 +85,8 @@ class Turtle{
 			      rotate(this._rotationAngle);
 			    } else if (c == '-') {		//turn "left" by rotationAngle
 			      rotate(-this._rotationAngle);
+					} else if(c == '|'){
+						rotate(PI);
 			    } else if (c == '[') {		//save current position
 			      push();
 			    } else if (c == ']') {		//return to the last saved position

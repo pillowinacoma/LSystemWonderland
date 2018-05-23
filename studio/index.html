@@ -12,7 +12,7 @@
 		<tr>
 			<td>
 				<form id='formLsystem' method="get" onsubmit="getAction();">
-					<fieldset id="menu">
+					<fieldset id="menu" class>
 						<table style="width:100%;">
 							<tr><th colspan="2" style="text-align: center;">Make Your own L-System</th></tr>
 							<tr><td>Axiom</td><td><input type="text" id="axiom" name="axiom" required></td></tr>
@@ -20,9 +20,9 @@
 							<tr><td>step length</td><td><input type="text" id="dist" name="dist" required></td></tr>
 							<tr><td>Grammar Type</td>
 									<td>
-											<input type="radio" id="DOL" name="grammarType" value="DOL" onclick="affProba();" checked="checked">
+											<input type="radio" id="DOL" name="grammarType" value="DOL" onclick="affProba();" autocomplete="off">
 											<label for="DOL">DOL</label>
-											<input type="radio" id="SOL" name="grammarType" value="SOL" onclick="affProba();">
+											<input type="radio" id="SOL" name="grammarType" value="SOL" onclick="affProba();" autocomplete="off">
 											<label for="SOL">SOL</label>
 									</td>
 							</tr>
@@ -40,47 +40,85 @@
 								</td>
 							</tr>
 							<tr><td id="Buttons" colspan="2">
-									<input type="submit" id="create" class="formButts" value="Create now!">
-									<input type="reset"  id="reset"  class="formButts" value="Reset">
+									<input type="submit" id="create" class="formButts fbuttons" value="Create now!">
+									<input type="reset"  id="reset"  class="formButts fbuttons" value="Reset">
 								</td>
 							</tr>
 						</table>
 					</fieldset>
-					<fieldset>
+					<fieldset id="DOLsugg" class="DOL">
 						<table style="width:100%;">
 							<tr><th colspan="2" style="text-align: center;">Samples</th></tr>
-							<tr><td><a href="#"><input type="button" id="kochSnowflake" value="Koch Snowflake" onclick = "initKochSnowflake();"></a></td>
-								<td><img style="max-width: 10em" src="images/kochSnowflake.png"></td>
-							</tr>
-							<tr><td><a href="#"><input type="button" id="SerpinskiCurve" value="Serpinski Curve" onclick = "initSerpinskiCurve();"></a></td>
-								<td><img style="max-width: 10em" src="images/SerpinskiCurve.png"></td>
-							</tr>
-							<tr><td><a href="#"><input type="button" id="DragonCurve" value="Dragon Curve" onclick = "initDragonCurve();"></a></td>
-								<td><img style="max-width: 10em" src="images/DragonCurve.png"></td>
-							</tr>
-							<tr><td><a href="#"><input type="button" id="GosperCurve" value="Gosper Curve" onclick = "initGosperCurve();"></a></td>
-								<td><img style="max-width: 10em" src="images/GosperCurve.png"></td>
-							</tr>
-							<tr><td><a href="#"><input type="button" id="IslandsAndLakes" value="Islands And Lakes" onclick = "initIslandsAndLakes();"></a></td>
-								<td><img style="max-width: 10em" src="images/IslandsAndLakes.png"></td>
-							</tr>
-							<tr><td><a href="#"><input type="button" id="Plant1" value="Plant1" onclick = "initPlant1();"></a></td>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant1" value="Plant1" onclick = "initPlant1();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant1.png"></td>
 							</tr>
-							<tr><td><a href="#"><input type="button" id="Plant2" value="Plant2" onclick = "initPlant2();"></a></td>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant2" value="Plant2" onclick = "initPlant2();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant2.png"></td>
 							</tr>
-							<tr><td><a href="#"><input type="button" id="Plant3" value="Plant3" onclick = "initPlant3();"></a></td>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant3" value="Plant3" onclick = "initPlant3();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant3.png"></td>
 							</tr>
-							<tr><td><a href="#"><input type="button" id="Plant4" value="Plant4" onclick = "initPlant4();"></a></td>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant4" value="Plant4" onclick = "initPlant4();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant4.png"></td>
 							</tr>
-							<tr><td><a href="#"><input type="button" id="Plant5" value="Plant5" onclick = "initPlant5();"></a></td>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant5" value="Plant5" onclick = "initPlant5();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant5.png"></td>
 							</tr>
-							<tr><td><a href="#"><input type="button" id="Plant6" value="Plant6" onclick = "initPlant6();"></a></td>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant6" value="Plant6" onclick = "initPlant6();"></a></td>
 								<td><img style="max-width: 10em" src="images/Plant6.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="kochSnowflake" value="Koch Snowflake" onclick = "initKochSnowflake();"></a></td>
+								<td><img style="max-width: 10em" src="images/kochSnowflake.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="SerpinskiCurve" value="Serpinski Curve" onclick = "initSerpinskiCurve();"></a></td>
+								<td><img style="max-width: 10em" src="images/SerpinskiCurve.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="DragonCurve" value="Dragon Curve" onclick = "initDragonCurve();"></a></td>
+								<td><img style="max-width: 10em" src="images/DragonCurve.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="GosperCurve" value="Gosper Curve" onclick = "initGosperCurve();"></a></td>
+								<td><img style="max-width: 10em" src="images/GosperCurve.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="IslandsAndLakes" value="Islands And Lakes" onclick = "initIslandsAndLakes();"></a></td>
+								<td><img style="max-width: 10em" src="images/LakesAndIslands.png"></td>
+							</tr>
+						</table>
+					</fieldset>
+					<fieldset id="SOLsugg" class="SOL" hidden>
+						<table style="width:100%;">
+							<tr><th colspan="2" style="text-align: center;">Samples</th></tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant1" value="Plant1" onclick = "initPlant1SOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/Plant1SOL.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant2" value="Plant2" onclick = "initPlant2SOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/Plant2SOL.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant3" value="Plant3" onclick = "initPlant3SOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/Plant3SOL.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant4" value="Plant4" onclick = "initPlant4SOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/Plant4SOL.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant5" value="Plant5" onclick = "initPlant5SOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/Plant5SOL.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="Plant6" value="Plant6" onclick = "initPlant6SOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/Plant6SOL.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="kochSnowflake" value="Koch Snowflake" onclick = "initKochSnowflakeSOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/kochSnowflake.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="SerpinskiCurve" value="Serpinski Curve" onclick = "initSerpinskiCurveSOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/SerpinskiCurve.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="DragonCurve" value="Dragon Curve" onclick = "initDragonCurveSOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/DragonCurve.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="GosperCurve" value="Gosper Curve" onclick = "initGosperCurveSOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/GosperCurve.png"></td>
+							</tr>
+							<tr><td><a href="#"><input type="button" class="sampleButt button1" id="IslandsAndLakes" value="Islands And Lakes" onclick = "initIslandsAndLakesSOL();"></a></td>
+								<td><img style="max-width: 10em" src="images/LakesAndIslands.png"></td>
 							</tr>
 						</table>
 					</fieldset>
