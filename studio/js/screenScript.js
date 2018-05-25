@@ -21,7 +21,7 @@ function setup(){
 	screen.position(windowWidth/64,windowHeight/64);
 	background(BG_COLOR);
 	bigW = width/2;
-	bigH = height/2;
+	bigH = height;
 	/*
 	var generationButton = createButton('Genera');
 	generationButton.mousePressed(generate);

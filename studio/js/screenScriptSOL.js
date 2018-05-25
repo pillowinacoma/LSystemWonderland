@@ -22,7 +22,7 @@ function setup(){
 	screen.position(windowWidth/64,windowHeight/64);
 	background(BG_COLOR);
 	bigW = width/2;
-	bigH = height/2;
+	bigH = height;
 	nbRepP = createP("");
 	nbRepP.position(screen.position().x+20,screen.position().y+20);
 	nbRepP.attribute('id', 'nbRepP');
